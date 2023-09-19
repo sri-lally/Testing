@@ -1,0 +1,32 @@
+name: List Branches and Store in Text File
+
+ 
+
+on:
+  workflow_dispatch: 
+
+ 
+
+jobs:
+  list-branches:
+    runs-on: ubuntu-latest
+
+ 
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+ 
+
+      - name: List Branches
+        run: |
+          git fetch --all
+          git branch -r > branch-list.txt
+ 
+
+      - name: Create Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: branch-list
+          path: branch-list.txt
